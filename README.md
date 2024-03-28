@@ -1,1 +1,2 @@
 <h1>Controle de Gastos</h1>
+<strong> Essa API foi criada com intuito de controlar os castos. Com ela é possivel informar se você esta recebendou ou enviando dinheiro, registrar a origem dessa transação, guardar a data e hora que a movimentação foi feita, valores e fazer um balanço geral de quanto entrou e saiu de dinheiro.</strong>
