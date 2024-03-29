@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jws = require('jsonwebtoken');
-const jwsSecret = require('../../senha')
+const jwsSecret = process.env.SENHA_JWT;
 const {
     verificarUsuarioPorEmail,
     USUARIO_OBRIGATORIO,
@@ -13,7 +13,6 @@ const { poolQuery } = require('../../utils/verificaTransacao')
 
 const cadastrarUsuario = async (req, res) => {
     const { nome, email, senha } = req.body
-    const senhaCriptografada = await bcrypt.hash(senha, 10)
 
     try {
         if (!nome || !email || !senha) {
@@ -28,6 +27,7 @@ const cadastrarUsuario = async (req, res) => {
     }
 
     try {
+        const senhaCriptografada = await bcrypt.hash(senha, 10)
         const novoUsuario = await poolQuery('INSERT INTO usuarios (nome, email, senha) VALUES ($1, $2, $3) RETURNING id, nome, email', [nome, email, senhaCriptografada])
         return res.status(201).json(novoUsuario.rows[0]);
     } catch (error) {

@@ -1,6 +1,6 @@
 const pool = require("../data/conection")
 const jws = require('jsonwebtoken');
-const jwsSecret = require('../senha')
+const jwsSecret = process.env.SENHA_JWT
 
 const autenticacaoUsuario = async (req, res, next) => {
     const { authorization } = req.headers
